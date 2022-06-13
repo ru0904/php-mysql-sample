@@ -2,24 +2,33 @@
 
 ini_set('display_errors',"On");
 
+// phpはデータ型をもたない（動的データを持つ）
 // MySQLiコネクタを作成
+
 $link = mysqli_connect("localhost","root","","world");
 
 // DBコネクションを確立
+// !は反転処理記号
+// dieで終了
+
 if(!$link){
     die("コネクションエラー");
 }
 
 // SQL文を生成
+
 $query = "SELECT CountryCode, Language, IsOfficial FROM Countrylanguage ORDER BY CountryCode LIMIT 30";
 
 // SQl文を実行、結果を変数に格納
+
 $result = mysqli_query($link, $query);
 
 // DBコネクションを切断
+
 mysqli_close($link);
 
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -35,10 +44,10 @@ mysqli_close($link);
 <body>
 <form class="container" action="./search-country.php" method="post" >
     <div clacc="row mb-3">
-        <label class="name" class="col-3 col-form-label">name</label>
-        <div class="col-9">
-            <input type="text" class="form-contry"  id="name" name= "name" value="<?php echo $name;  ?>">
-        </div>
+    <label class="name" class="col-3 col-form-label">name</label>
+     <div class="col-9">
+     <input type="text" class="form-contry"  id="name" name= "name" value="<?php echo $name;  ?>">
+     </div>
     </div>
     <button type="submit" class="btn btn-primary" name="submit" value="search">検索</button>
 </form>
@@ -51,9 +60,11 @@ mysqli_close($link);
 
 <tbody>
     <?php while($row = mysqli_fetch_assoc($result)) { ?> 
+    <tr>
         <td><?php echo $row[ 'CountryCode' ]; ?></td>
         <td><?php echo $row[ 'Language' ]; ?></td>
         <td><?php echo $row[ 'IsOfficial' ]; ?></td>
+    </tr>
     <?php } ?> 
 </tbody>
 

@@ -11,7 +11,7 @@ if(!$link){
 }
 
 // SQL文を生成
-$query = "SELECT Code, Name, Continent  FROM Country ORDER BY Code LIMIT 30";
+$query = "SELECT Code, Name, Continent, Region  FROM Country ORDER BY Code LIMIT 30";
 
 // SQl文を実行、結果を変数に格納
 $result = mysqli_query($link, $query);
@@ -20,6 +20,7 @@ $result = mysqli_query($link, $query);
 mysqli_close($link);
 
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -30,24 +31,25 @@ mysqli_close($link);
 <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-<title>wwwwwwwold</title>
-</head>
 <body>
-<h1>Hello, world!</h1>
-<table>
-    <th>Code</th>
-    <th>Name</th>
-    <th>Continent</th>
-</table>
-
-<tbody>
+  <table class = "table">
+    <thead>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Continent</th>
+        <th>Region</th>
+    </thead>
+    <tbody>
     <?php while($row = mysqli_fetch_assoc($result)) { ?> 
-        <td><?php echo $row[ 'Code' ]; ?></td>
-        <td><?php echo $row[ 'Name' ]; ?></td>
-        <td><?php echo $row [ 'Continent' ]; ?></td>
+        <tr>
+            <td><?php echo $row[ 'Code' ]; ?></td>
+            <td><?php echo $row[ 'Name' ]; ?></td>
+            <td><?php echo $row [ 'Continent' ]; ?></td>
+            <td><?php echo $row [ 'Region' ]; ?></td>
+        </tr>
     <?php } ?> 
-</tbody>
-
+    </tbody>
+</table>
 <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->
